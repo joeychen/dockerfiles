@@ -58,4 +58,4 @@ RUN npm i -gq grunt-cli bower coveralls && \
 	npm install -g beautifier --save-dev && \
 	ln -s /usr/bin/nodejs /usr/bin/node
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
