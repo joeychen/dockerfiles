@@ -4,6 +4,8 @@
 
 FROM ubuntu:16.04
 
+ENV TERM=$xterm
+
 # make /bin/sh symlink to bash instead of dash
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
@@ -52,10 +54,18 @@ RUN apt-get -y install locales \
 	&& rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 # install additional packages required for Node.js�n
 RUN npm i -gq grunt-cli bower coveralls && \
 	npm install -g beautifier --save-dev && \
 	ln -s /usr/bin/nodejs /usr/bin/node
+
+ENV PATH $PATH:/usr/local/lib/python2.7/dist-packages
+
+#  generating RSA key pair for enc image
+RUN openssl genrsa -out /root/private.pem 
+RUN openssl rsa -in /root/private.pem -outform PEM -pubout -out /root/public.pem 
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
