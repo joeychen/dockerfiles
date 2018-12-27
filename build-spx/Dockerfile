@@ -65,7 +65,10 @@ RUN npm i -gq grunt-cli bower coveralls && \
 ENV PATH $PATH:/usr/local/lib/python2.7/dist-packages
 
 #  generating RSA key pair for enc image
-RUN openssl genrsa -out /root/private.pem 
-RUN openssl rsa -in /root/private.pem -outform PEM -pubout -out /root/public.pem 
+RUN openssl genrsa -out /private.pem 
+RUN openssl rsa -in /private.pem -outform PEM -pubout -out /public.pem 
+
+# avoid ttyname failed message
+RUN sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
