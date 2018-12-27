@@ -69,6 +69,6 @@ RUN openssl genrsa -out /private.pem
 RUN openssl rsa -in /private.pem -outform PEM -pubout -out /public.pem 
 
 # avoid ttyname failed message
-RUN sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
+RUN sed -i 's/mesg n/test -t 0 \&\& mesg n/' /root/.profile
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
