@@ -5,7 +5,7 @@ mdsdir=`pwd`
 workspacedir=$mdsdir/workspace
 
 echo "homedir=$homedir"
-echo "mdsdir=$mdsdir" 
+echo "mdsdir=$mdsdir"
 echo "workspacedir=$workspacedir"
 
 docker run -it --rm \
@@ -15,5 +15,5 @@ docker run -it --rm \
     -v $mdsdir:/mds \
     -v $workspacedir:/workspace \
     --net=host \
-    joeychen/build-spx:latest \
+    joeychen/build-spx-mds:latest \
     mds/MDS
