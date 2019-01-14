@@ -3,8 +3,18 @@
 # 
 
 FROM ubuntu:16.04
+LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
 
 ENV TERM=$xterm
+
+# make the "en_US.UTF-8" locale
+RUN apt-get update && \
+	apt-get -y install locales && \
+	rm -rf /var/lib/apt/lists/* && \
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.utf8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 # make /bin/sh symlink to bash instead of dash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -13,8 +23,8 @@ RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
 
 # installing SPX related packages
 RUN dpkg --add-architecture i386
-RUN apt-get update \
-	&& apt-get -y install \
+RUN apt-get update && \
+	apt-get -y install \
 		bc \
 		curl \
 		gcc-multilib \
@@ -47,17 +57,9 @@ RUN apt-get update \
 		coreutils \
 		openssl \
 		libc6:i386 \
-		zlib1g:i386
+		zlib1g:i386 
 
-# make the "en_US.UTF-8" locale
-RUN apt-get -y install locales \
-	&& rm -rf /var/lib/apt/lists/* \
-    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG en_US.utf8
-ENV LANGUAGE en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
-
-# install additional packages required for Node.js�n
+# install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
 	npm install -g beautifier --save-dev && \
 	ln -s /usr/bin/nodejs /usr/bin/node
@@ -65,8 +67,8 @@ RUN npm i -gq grunt-cli bower coveralls && \
 ENV PATH $PATH:/usr/local/lib/python2.7/dist-packages
 
 #  generating RSA key pair for enc image
-RUN openssl genrsa -out /private.pem 
-RUN openssl rsa -in /private.pem -outform PEM -pubout -out /public.pem 
+RUN openssl genrsa -out /private.pem && \
+	openssl rsa -in /private.pem -outform PEM -pubout -out /public.pem 
 
 # avoid ttyname failed message
 RUN sed -i 's/mesg n/test -t 0 \&\& mesg n/' /root/.profile
