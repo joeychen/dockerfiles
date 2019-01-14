@@ -1,5 +1,5 @@
 #
-# DESCRIPTION:	  Create a container with prerequisites to bulid spx 
+# DESCRIPTION:	  Create a container with prerequisites to bulid spx and running mds
 # 
 
 FROM ubuntu:16.04
@@ -72,5 +72,18 @@ RUN openssl genrsa -out /private.pem && \
 
 # avoid ttyname failed message
 RUN sed -i 's/mesg n/test -t 0 \&\& mesg n/' /root/.profile
+
+# installing Oracle JDK 8 and other prerequisites for running mds
+RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
+    apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:webupd8team/java -y && \
+    apt-get update && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
+    apt-get install -y oracle-java8-installer oracle-java8-set-default libxext-dev libxrender-dev libxtst-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+	rm -rf /tmp/*
+RUN apt-get update && apt-get install -y libgtk2.0-0 libcanberra-gtk-module
+
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
