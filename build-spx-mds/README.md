@@ -13,3 +13,10 @@ docker run -it --rm \
     joeychen/build-spx-mds \
     mds/MDS
 ```
+
+## Troubleshooting 
+Disable the access control to allow clients to connect from any host.
+```
+$xhost +
+access control disabled, clients can connect from any host
+```
