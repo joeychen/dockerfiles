@@ -1,0 +1,260 @@
+{
+	"version": 1,
+	"header_image": "board/demo.png",
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Information",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1,
+				"5": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 3,
+				"5": 5
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "return \"<div class='tw-value' style='font-size: 15px; max-width: 100%; color: Grey'>Local Time: <br/>\" + datasources[\"Clock\"][\"full_string_value\"] + \"</div>\"\n",
+						"height": 1
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "STATUS",
+						"value": "datasources[\"Status\"][\"msg\"] == 1",
+						"on_text": "ONLINE",
+						"off_text": "OFFLINE"
+					}
+				}
+			]
+		},
+		{
+			"title": "DI VALUE",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1,
+				"5": 1
+			},
+			"col": {
+				"3": 1,
+				"4": 1,
+				"5": -14
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "CH:00",
+						"value": "var command = datasources[\"DiValue\"][\"msg\"];\nvar commandTime = command.split(';')[0];\nvar commandDataChannel = command.split(';')[1];\nvar commandDataValue = command.split(commandTime+';'+commandDataChannel+';')[1];\nreturn commandDataValue == 1;",
+						"on_text": "ON",
+						"off_text": "OFF"
+					}
+				},
+				{
+					"type": "html",
+					"settings": {
+						"html": "var command = datasources[\"DiValue\"][\"msg\"];\nvar dt = new Date(command.split(';')[0] * 1).toLocaleString();\n\nreturn \"<div class='tw-value' style='font-size: 10px; max-width: 100%; color: Silver;'>Last data point time: \" + dt + \"</div>\";",
+						"height": 1
+					}
+				}
+			]
+		},
+		{
+			"title": "DO VALUE",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 7,
+				"5": 1
+			},
+			"col": {
+				"3": 2,
+				"4": 1,
+				"5": 3
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "interactive_indicator",
+					"settings": {
+						"title": "CH:00",
+						"client_id": "4",
+						"value": "var command = datasources[\"DoValue\"][\"msg\"];\nvar commandTime = command.split(';')[0];\nvar commandDataChannel = command.split(';')[1];\nvar commandDataValue = command.split(commandTime+';'+commandDataChannel+';')[1];\nreturn commandDataValue == 1;",
+						"callback": "datasources[\"DoValue\"]",
+						"on_text": "ON",
+						"off_text": "OFF"
+					}
+				},
+				{
+					"type": "html",
+					"settings": {
+						"html": "var command = datasources[\"DoValue\"][\"msg\"];\nvar commandTime = new Date(command.split(';')[0] * 1).toLocaleString();\nreturn \"<div class='tw-value' style='font-size: 10px; max-width: 100%; color: Silver;'>Last data point time: \" + commandTime + \"</div>\";\n\n",
+						"height": 1
+					}
+				}
+			]
+		},
+		{
+			"title": "AI VALUE",
+			"width": 1,
+			"row": {
+				"3": 7,
+				"4": 1,
+				"5": 1
+			},
+			"col": {
+				"3": 1,
+				"4": 2,
+				"5": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "CH:00 ",
+						"value": "var command = datasources[\"AiValue\"][\"msg\"];\nvar commandTime = command.split(';')[0];\nvar commandDataChannel = command.split(';')[1];\nvar commandDataValue = command.split(commandTime+';'+commandDataChannel+';')[1];\nreturn commandDataValue;",
+						"units": "Volts",
+						"min_value": 0,
+						"max_value": "10"
+					}
+				},
+				{
+					"type": "html",
+					"settings": {
+						"html": "var command = datasources[\"AiValue\"][\"msg\"];\nvar dt = new Date(command.split(';')[0] * 1).toLocaleString();\n\nreturn \"<div class='tw-value' style='font-size: 10px; max-width: 100%; color: Silver;'>Last data point time: \" + dt + \"</div>\";",
+						"height": 1
+					}
+				}
+			]
+		},
+		{
+			"title": "AO VALUE",
+			"width": 1,
+			"row": {
+				"3": 7
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "interactive_gauge",
+					"settings": {
+						"title": "CH:00",
+						"client_id": "9",
+						"value": "var command = datasources[\"AoValue\"][\"msg\"];\nvar commandTime = command.split(';')[0];\nvar commandDataChannel = command.split(';')[1];\nvar commandDataValue = command.split(commandTime+';'+commandDataChannel+';')[1];\nreturn commandDataValue;",
+						"callback": "datasources[\"AoValue\"]",
+						"click_value": true,
+						"units": "Volts",
+						"min_value": 0,
+						"max_value": "10"
+					}
+				},
+				{
+					"type": "html",
+					"settings": {
+						"html": "var command = datasources[\"AoValue\"][\"msg\"];\nvar dt = new Date(command.split(';')[0] * 1).toLocaleString();\nreturn \"<div class='tw-value' style='font-size: 10px; max-width: 100%; color: Silver;'>Last data point time: \" + dt + \"</div>\";",
+						"height": 1
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "DoValue",
+			"type": "paho_mqtt",
+			"settings": {
+				"path": "",
+				"server": "192.168.0.113",
+				"port": 9001,
+				"use_ssl": false,
+				"client_id": "17",
+				"username": "",
+				"password": "",
+				"topic": "aiot/DEMO/9E:65:F9:00:E2:9C/17",
+				"json_data": false
+			}
+		},
+		{
+			"name": "Clock",
+			"type": "clock",
+			"settings": {
+				"refresh": 1,
+				"name": "Clock"
+			}
+		},
+		{
+			"name": "DiValue",
+			"type": "paho_mqtt",
+			"settings": {
+				"server": "192.168.0.113",
+				"port": 9001,
+				"use_ssl": false,
+				"client_id": "25",
+				"username": "",
+				"password": "",
+				"topic": "aiot/DEMO/9E:65:F9:00:E2:9C/25",
+				"json_data": false
+			}
+		},
+		{
+			"name": "AiValue",
+			"type": "paho_mqtt",
+			"settings": {
+				"server": "192.168.0.113",
+				"port": 9001,
+				"use_ssl": false,
+				"client_id": "1",
+				"username": "",
+				"password": "",
+				"topic": "aiot/DEMO/9E:65:F9:00:E2:9C/1",
+				"json_data": false
+			}
+		},
+		{
+			"name": "AoValue",
+			"type": "paho_mqtt",
+			"settings": {
+				"server": "192.168.0.113",
+				"port": 9001,
+				"use_ssl": false,
+				"client_id": "9",
+				"username": "",
+				"password": "",
+				"topic": "aiot/DEMO/9E:65:F9:00:E2:9C/9",
+				"json_data": false,
+				"name": "AoValue"
+			}
+		},
+		{
+			"name": "Status",
+			"type": "paho_mqtt",
+			"settings": {
+				"name": "Status",
+				"server": "192.168.0.113",
+				"port": 9001,
+				"use_ssl": false,
+				"client_id": "connected",
+				"username": "",
+				"password": "",
+				"topic": "aiot/DEMO/9E:65:F9:00:E2:9C/connected",
+				"json_data": false
+			}
+		}
+	],
+	"columns": 3
+}
