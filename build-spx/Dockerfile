@@ -57,7 +57,8 @@ RUN apt-get update && \
 		coreutils \
 		openssl \
 		libc6:i386 \
-		zlib1g:i386 
+		zlib1g:i386 \
+		libtool
 
 # install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
