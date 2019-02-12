@@ -59,6 +59,10 @@ RUN apt-get update && \
 		libc6:i386 \
 		zlib1g:i386 
 
+# build vncserver                                                                                                                                                                        
+RUN apt-get update && \                                                                                                                                                                  
+    apt-get -y install autoconf libtool pkg-config 
+    
 # install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
 	npm install -g beautifier --save-dev && \
