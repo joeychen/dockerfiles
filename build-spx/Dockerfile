@@ -61,7 +61,7 @@ RUN apt-get update && \
 
 # build vncserver                                                                                                                                                                        
 RUN apt-get update && \                                                                                                                                                                  
-    apt-get -y install autoconf libtool pkg-config 
+    apt-get -y install autoconf automake libtool pkg-config 
 
 # install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
