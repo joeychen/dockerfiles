@@ -63,6 +63,9 @@ RUN apt-get update && \
 RUN apt-get update && \                                                                                                                                                                  
     apt-get -y install autoconf automake libtool pkg-config 
 
+# build yafuflash
+RUN apt-get -y install libssl-dev
+
 # install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
 	npm install -g beautifier --save-dev && \
