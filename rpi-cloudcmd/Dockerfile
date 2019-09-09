@@ -2,7 +2,7 @@
 # DESCRIPTION: A cloudcmd image for raspberry pi (based on arm32v7/node).  
 # 
 FROM arm32v7/node:latest
-LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
+LABEL maintainer="joeychen"
 
 COPY qemu-arm-static /usr/bin/
 

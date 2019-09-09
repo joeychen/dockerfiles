@@ -1,5 +1,5 @@
 FROM node:8.9-alpine
-LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
+LABEL maintainer="joeychen"
 
 RUN apk update && apk add git openssl wget
 RUN cd /opt && \
