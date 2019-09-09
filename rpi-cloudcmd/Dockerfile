@@ -9,6 +9,8 @@ LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
 
 #COPY --from=builder /usr/bin/qemu-arm-static /usr/bin/qemu-arm-static
 
+COPY qemu-arm-static /usr/bin/
+
 # To handle 'not get uid/gid'
 RUN npm config set unsafe-perm true
 
