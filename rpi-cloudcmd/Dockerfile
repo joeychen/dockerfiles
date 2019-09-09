@@ -9,7 +9,10 @@ LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
 
 COPY --from=builder /usr/bin/qemu-arm-static /usr/bin/qemu-arm-static
 
-ENV NODE_ENV production
+# To handle 'not get uid/gid'
+RUN npm config set unsafe-perm true
+
+#ENV NODE_ENV production
 
 RUN npm i cloudcmd -g
 
