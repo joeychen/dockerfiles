@@ -1,20 +1,18 @@
 #
 # DESCRIPTION: A cloudcmd image for raspberry pi (based on arm32v7/node).  
 # 
-#FROM golang:1.12.0 AS builder
-#COPY qemu-arm-static /usr/bin
-
 FROM arm32v7/node:latest
 LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
 
-#COPY --from=builder /usr/bin/qemu-arm-static /usr/bin/qemu-arm-static
-
 COPY qemu-arm-static /usr/bin/
+
+ENV NODE_ENV=production
 
 # To handle 'not get uid/gid'
 RUN npm config set unsafe-perm true
 
-ENV NODE_ENV production
+# npm WARN tarball tarball data for edward@^11.0.0
+RUN npm install edward@^11.0.0 -g
 
 RUN npm i cloudcmd -g
 
