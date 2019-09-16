@@ -11,8 +11,8 @@ ENV NODE_ENV=production
 # To handle 'not get uid/gid'
 RUN npm config set unsafe-perm true
 
-# npm WARN tarball tarball data for edward@^11.0.0
-RUN npm install edward@^11.0.0 -g
+# npm WARN tarball tarball data for edward
+RUN npm i edward -g
 
 RUN npm i cloudcmd -g
 
