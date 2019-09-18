@@ -67,7 +67,7 @@ RUN apt-get update && \
 RUN apt-get -y install libssl-dev
 
 # other utilities 
-RUN apt-get -y install jq crudini
+RUN apt-get -y install jq crudini moreutils
 
 # install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
