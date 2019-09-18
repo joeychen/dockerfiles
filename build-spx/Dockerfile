@@ -66,6 +66,9 @@ RUN apt-get update && \
 # build yafuflash
 RUN apt-get -y install libssl-dev
 
+# other utilities 
+RUN apt-get -y install jq crudini
+
 # install additional packages required for nodejs
 RUN npm i -gq grunt-cli bower coveralls && \
 	npm install -g beautifier --save-dev && \
