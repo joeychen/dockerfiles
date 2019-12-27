@@ -3,7 +3,7 @@
 # 
 
 FROM ubuntu:16.04
-LABEL maintainer="Joey Chen <joeychen.zh@gmail.com>"
+LABEL maintainer="joeychen"
 
 ENV TERM=$xterm
 
