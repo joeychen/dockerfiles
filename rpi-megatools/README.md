@@ -4,6 +4,6 @@
 
 ## Usage
 ```
-docker run -it --rm -v "$(pwd)":/workdir -w /workdir joeychen/rpi-megatools <command> <parameters>
+docker run -ti --rm -v=/<your_downloads_folder>:/downloads joeychen/rpi-megatools:latest megadl --path /downloads <mega_link>
 ```
 
