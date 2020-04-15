@@ -1,0 +1,21 @@
+#
+# DESCRIPTION: 
+# 
+
+FROM i386/centos:6
+LABEL maintainer="joeychen"
+
+# For install 32-bit packages
+RUN sed -i 's/\$arch/i686/g' /etc/yum.repos.d/*
+RUN sed -i 's/\$basearch/i386/g' /etc/yum.repos.d/*
+
+RUN yum -y update; yum clean all
+RUN yum -y groupinstall 'Development Tools'; yum clean all
+RUN yum -y install openssl-devel
+
+# prefix /bin/bash with linux32 in /bin/sh
+RUN rm /bin/sh && \
+    echo -e '#!/bin/bash\n/usr/bin/linux32 -- /bin/bash "$@"' > /bin/sh && \
+    chmod +x /bin/sh
+
+ENTRYPOINT ["/bin/sh", "-l", "-c"]
