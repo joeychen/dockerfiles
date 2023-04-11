@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -yy \
       	vim \
       	wget \
       	zstd \
-      	screen
+        tmux
 
 RUN apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
