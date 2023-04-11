@@ -26,7 +26,8 @@ RUN apt-get update && apt-get install -yy \
       	texinfo \
       	vim \
       	wget \
-      	zstd
+      	zstd \
+      	screen
 
 RUN apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
